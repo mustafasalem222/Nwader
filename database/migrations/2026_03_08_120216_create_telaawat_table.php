@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Sheikh;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,11 +11,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('sheikhs', function (Blueprint $table) {
+        Schema::create('telaawat', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Sheikh::class)->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('image_url')->nullable();
-            $table->string('description')->nullable();
+            $table->string('audio_url');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('sheikhs');
+        Schema::dropIfExists('telaawat');
     }
 };
