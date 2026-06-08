@@ -1,3 +1,3 @@
-<a href="{{ $href }}" {{ $attributes->merge(['class' => 'text-white hover:text-gray-400 transition']) }}>
+<a href="{{ $href }}" {{ $attributes->merge(['class' => 'text-gray-300 hover:text-white transition']) }}>
     {{ $slot }}
 </a>

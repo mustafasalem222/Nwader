@@ -29,7 +29,7 @@ new class extends Component {
 
     Auth::login($user);
 
-    return redirect('/dashboard');
+    return redirect('/');
   }
 
   public function render()
@@ -38,69 +38,48 @@ new class extends Component {
   }
 };
 ?>
-<div>
-  <div class="flex items-center justify-center min-h-screen">
-
+<div class="flex items-center justify-center min-h-screen">
     <div class="w-full max-w-md bg-gray-900/90 shadow-2xl rounded-2xl p-8 space-y-6">
 
-      <!-- Title -->
-      <div class="text-center space-y-2">
-        <h2 class="text-2xl font-bold text-white">
-          إنشاء حساب
-        </h2>
+        <div class="text-center space-y-2">
+            <h2 class="text-2xl md:text-3xl font-bold text-white">
+                إنشاء حساب
+            </h2>
+            <p class="text-base md:text-lg text-gray-400">
+                أنشئ حسابك للمتابعة
+            </p>
+        </div>
 
-        <p class="text-sm text-gray-300">
-          أنشئ حسابك للمتابعة
+        <form wire:submit="register" class="space-y-5">
+            <x-input label="الاسم" placeholder="ادخل اسمك" wire:model="name" />
+            <x-input label="الإيميل" type="email" placeholder="example@email.com" wire:model="email" />
+            <x-input label="كلمة المرور" type="password" wire:model="password" />
+            <x-input label="تأكيد كلمة المرور" type="password" wire:model="password_confirmation" />
+            <x-button>إنشاء الحساب</x-button>
+        </form>
+
+        <div class="flex items-center gap-3">
+            <div class="flex-1 h-px bg-gray-700"></div>
+            <span class="text-base text-gray-500">أو</span>
+            <div class="flex-1 h-px bg-gray-700"></div>
+        </div>
+
+        <a href="{{ route('auth.redirect', 'google') }}"
+            class="flex items-center justify-center gap-2 border border-gray-600 rounded-lg py-3 hover:bg-gray-800 transition text-white text-base md:text-lg">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
+            التسجيل باستخدام Google
+        </a>
+        <a href="{{ route('auth.redirect', 'facebook') }}"
+            class="flex items-center justify-center gap-2 border border-gray-600 rounded-lg py-3 hover:bg-gray-800 transition text-white text-base md:text-lg">
+            <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" class="w-5 h-5">
+            التسجيل باستخدام Facebook
+        </a>
+
+        <p class="text-center text-base md:text-lg text-gray-500">
+            لديك حساب بالفعل؟
+            <a href="{{ route('login') }}" class="text-blue-500 hover:text-blue-400 transition">
+                تسجيل الدخول
+            </a>
         </p>
-      </div>
-
-      <!-- Form -->
-      <form wire:submit="register" class="space-y-4">
-
-        <flux:input label="الاسم" variant="outline" wire:model="name" placeholder="ادخل اسمك"
-          class="bg-gray-800 text-white border-gray-700 placeholder-gray-400" />
-
-        <flux:input type="email" label="الإيميل" wire:model="email" placeholder="example@email.com"
-          class="bg-gray-800 text-white border-gray-700 placeholder-gray-400" />
-
-        <flux:input type="password" label="كلمة المرور" wire:model="password"
-          class="bg-gray-800 text-white border-gray-700 placeholder-gray-400" />
-
-        <flux:input type="password" label="تأكيد كلمة المرور" wire:model="password_confirmation"
-          class="bg-gray-800 text-white border-gray-700 placeholder-gray-400" />
-
-        <flux:button variant="primary" type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white">
-          إنشاء الحساب
-        </flux:button>
-
-      </form>
-
-      <!-- Divider -->
-      <div class="flex items-center gap-3">
-        <div class="flex-1 h-px bg-gray-700"></div>
-        <span class="text-sm text-gray-400">أو</span>
-        <div class="flex-1 h-px bg-gray-700"></div>
-      </div>
-
-      <!-- Google Button -->
-      <a href="{{ route('auth.redirect', 'google') }}"
-        class="flex items-center justify-center gap-2 border border-gray-600 rounded-lg py-2 hover:bg-gray-800 transition text-white">
-
-        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
-
-        التسجيل باستخدام Google
-
-      </a>
-      <a href="{{ route('auth.redirect', 'facebook') }}"
-        class="flex items-center justify-center gap-2 border border-gray-600 rounded-lg py-2 hover:bg-gray-800 transition text-white">
-
-        <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" class="w-5 h-5">
-
-        التسجيل باستخدام Facebook
-
-      </a>
-
     </div>
-
-  </div>
 </div>
