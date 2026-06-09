@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('is_admin')->default(false);
             $table->string('provider_id')->nullable()->index();
             $table->text('provider_avatar')->nullable();
             $table->string('provider_name')->nullable();

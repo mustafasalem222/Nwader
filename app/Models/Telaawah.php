@@ -8,6 +8,13 @@ class Telaawah extends Model
 {
     protected $table = 'telaawat';
 
+    protected $fillable = [
+        'sheikh_id',
+        'name',
+        'audio_url',
+        'description',
+    ];
+
     public function sheikh()
     {
         return $this->belongsTo(Sheikh::class);

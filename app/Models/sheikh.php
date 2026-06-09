@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sheikh extends Model
 {
+    protected $fillable = [
+        'name',
+        'image_url',
+        'description',
+    ];
+
     public function telaawat()
     {
         return $this->hasMany(Telaawah::class);

@@ -25,6 +25,12 @@
             @endguest
 
             @auth
+                @if (auth()->user()->is_admin)
+                    <a href="{{ route('admin.dashboard') }}" class="text-gray-300 hover:text-white transition text-sm">
+                        لوحة التحكم
+                    </a>
+                @endif
+
                 <div x-data="{ open: false }" class="relative">
 
                     <button @click="open = !open"
@@ -52,9 +58,15 @@
                             الملف الشخصي
                         </a>
 
+                        @if (auth()->user()->is_admin)
+                            <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-900 hover:text-white transition">
+                                لوحة التحكم
+                            </a>
+                        @endif
+
                         <div class="border-t border-gray-800"></div>
 
-                        <form method="POST" action="/">
+                        <form method="POST" action="/logout">
                             @csrf
                             <button type="submit"
                                 class="block w-full text-right px-4 py-2 text-sm text-red-500 hover:bg-gray-900 transition">

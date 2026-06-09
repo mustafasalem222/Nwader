@@ -11,10 +11,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        if (!User::where('email', 'test@example.com')->exists()) {
+        if (!User::where('email', 'admin@example.com')->exists()) {
             User::factory()->create([
-                'name' => 'Test User',
-                'email' => 'test@example.com',
+                'name' => 'admin',
+                'email' => 'admin@example.com',
+                'password' => bcrypt('password'),
+                'is_admin' => true,
             ]);
         }
 
@@ -30,10 +32,26 @@ class DatabaseSeeder extends Seeder
         ];
 
         $telawahNames = [
-            'سورة الفاتحة', 'سورة يس', 'سورة الرحمن', 'سورة الواقعة', 'سورة الملك',
-            'سورة الكهف', 'سورة مريم', 'سورة طه', 'سورة الحجرات', 'سورة الصافات',
-            'سورة الدخان', 'سورة النبأ', 'سورة الإنسان', 'سورة القيامة', 'سورة المطففين',
-            'سورة الزمر', 'سورة غافر', 'سورة فصلت', 'سورة القمر', 'سورة الحاقة',
+            'سورة الفاتحة',
+            'سورة يس',
+            'سورة الرحمن',
+            'سورة الواقعة',
+            'سورة الملك',
+            'سورة الكهف',
+            'سورة مريم',
+            'سورة طه',
+            'سورة الحجرات',
+            'سورة الصافات',
+            'سورة الدخان',
+            'سورة النبأ',
+            'سورة الإنسان',
+            'سورة القيامة',
+            'سورة المطففين',
+            'سورة الزمر',
+            'سورة غافر',
+            'سورة فصلت',
+            'سورة القمر',
+            'سورة الحاقة',
         ];
 
         foreach ($sheikhs as $s) {
