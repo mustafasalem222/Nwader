@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 
     <style>
         body {
@@ -23,10 +24,13 @@
 
     <x-navbar />
 
-    <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-10">
+    <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-10 pb-28">
         {{ $slot }}
     </main>
 
+    <x-audio-player />
+
+    @livewireScripts
 </body>
 
 </html>

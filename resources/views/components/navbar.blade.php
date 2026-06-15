@@ -1,25 +1,25 @@
 <nav class="bg-black text-white border-b border-gray-800">
     <div class="container mx-auto flex justify-between items-center px-6 py-4">
 
-        <a href="{{ route('home') }}" class="text-2xl font-bold tracking-wide hover:text-gray-300 transition">
+        <a href="{{ route('home') }}" class="text-2xl font-bold tracking-wide hover:text-gray-300 transition" wire:navigate>
             نوادر
         </a>
 
         <div class="flex items-center gap-6 text-base font-medium">
 
-            <x-nav-link href="/">
+            <x-nav-link href="/" wire:navigate>
                 الشيوخ
             </x-nav-link>
 
-            <x-nav-link href="/">
+            <x-nav-link href="/" wire:navigate>
                 الاقتراحات
             </x-nav-link>
 
             @guest
-                <a href="{{ route('login') }}" class="text-blue-500 hover:text-blue-400 transition">
+                <a href="{{ route('login') }}" wire:navigate class="text-blue-500 hover:text-blue-400 transition">
                     تسجيل الدخول
                 </a>
-                <a href="{{ route('register') }}" class="text-blue-500 hover:text-blue-400 transition">
+                <a href="{{ route('register') }}" wire:navigate class="text-blue-500 hover:text-blue-400 transition">
                     تسجيل حساب
                 </a>
             @endguest
@@ -54,7 +54,7 @@
                         x-transition:leave-end="transform opacity-0 scale-95"
                         class="absolute left-0 mt-3 w-48 rounded-md shadow-lg py-1 bg-black border border-gray-800 z-50"
                         style="display: none;">
-                        <a href="/" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-900 hover:text-white transition">
+                        <a href="/" wire:navigate class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-900 hover:text-white transition">
                             الملف الشخصي
                         </a>
 

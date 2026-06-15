@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use Auth;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -23,12 +23,11 @@ class SocialiteController extends Controller
                 'provider_id' => $provider_user->getId(),
                 'provider_name' => $provider,
                 'provider_avatar' => $provider_user->getAvatar(),
-                'password' => bcrypt(str()->random(16))
-
+                'password' => bcrypt(str()->random(16)),
             ],
             [
                 'name' => $provider_user->getName(),
-                'email' => $provider_user->getEmail()
+                'email' => $provider_user->getEmail(),
             ]
         );
 

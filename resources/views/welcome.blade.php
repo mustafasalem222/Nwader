@@ -107,30 +107,45 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($telaawat as $index => $telaawah)
-                    <div class="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 hover:border-gray-600 transition group animate-fade-in-up"
-                        style="animation-delay: {{ ($index % 6) * 100 }}ms">
+                    <div class="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 hover:border-gray-600 transition group animate-fade-in-up cursor-pointer"
+                        style="animation-delay: {{ ($index % 6) * 100 }}ms"
+                        x-data='{ track: {!! json_encode(['id' => $telaawah->id, 'name' => $telaawah->name, 'audio_url' => $telaawah->audio_url, 'sheikh_name' => $telaawah->sheikh_name, 'download_url' => $telaawah->download_url, 'share_url' => $telaawah->share_url, 'show_url' => $telaawah->show_url]) !!} }'
+                        @click="if (!window.getSelection()?.toString()) { window.location = track.show_url; }">
                         <div class="flex items-center gap-4 mb-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700 group-hover:border-blue-500 transition flex-shrink-0">
-                                <span class="text-blue-500">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <button @click.stop="$store.player.play(track)"
+                                class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700 hover:border-blue-500 hover:bg-blue-600/20 transition flex-shrink-0 cursor-pointer"
+                                :class="{ 'border-blue-500 bg-blue-600/20': $store.player.track?.id === track.id && $store.player.playing }">
+                                <template x-if="$store.player.track?.id === track.id && $store.player.playing">
+                                    <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                                    </svg>
+                                </template>
+                                <template x-if="!($store.player.track?.id === track.id && $store.player.playing)">
+                                    <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z"/>
                                     </svg>
-                                </span>
-                            </div>
+                                </template>
+                            </button>
                             <div class="min-w-0">
                                 <h3 class="text-lg font-bold text-white truncate">{{ $telaawah->name }}</h3>
-                                <p class="text-sm text-gray-500 truncate">{{ $telaawah->sheikh->name }}</p>
+                                <p class="text-sm text-gray-500 truncate">{{ $telaawah->sheikh_name }}</p>
                             </div>
                         </div>
                         <p class="text-sm text-gray-400 leading-relaxed mb-4">{{ $telaawah->description }}</p>
                         <div class="flex items-center justify-between text-xs text-gray-600">
                             <span>{{ $telaawah->created_at->diffForHumans() }}</span>
-                            <span class="text-blue-500 group-hover:text-blue-400 transition flex items-center gap-1">
+                            <button @click.stop="$store.player.play(track)"
+                                class="text-blue-500 hover:text-blue-400 transition flex items-center gap-1">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
-                                استماع
-                            </span>
+                                <template x-if="$store.player.track?.id === track.id && $store.player.playing">
+                                    <span>جاري التشغيل</span>
+                                </template>
+                                <template x-if="!($store.player.track?.id === track.id && $store.player.playing)">
+                                    <span>استماع</span>
+                                </template>
+                            </button>
                         </div>
                     </div>
                 @empty

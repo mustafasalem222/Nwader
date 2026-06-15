@@ -53,14 +53,14 @@ class TelaawahController extends Controller
             ->with('success', 'تم إضافة التلاوة بنجاح');
     }
 
-    public function edit(Telaawah $telaawah)
+    public function edit(Telaawah $telaawat)
     {
-        $telaawah->load('sheikh');
+        $telaawat->load('sheikh');
         $sheikhs = Sheikh::orderBy('name')->get();
-        return view('admin.telaawat.edit', compact('telaawah', 'sheikhs'));
+        return view('admin.telaawat.edit', compact('telaawat', 'sheikhs'));
     }
 
-    public function update(StoreTelaawahRequest $request, Telaawah $telaawah)
+    public function update(StoreTelaawahRequest $request, Telaawah $telaawat)
     {
         $data = $request->validated();
 
@@ -68,15 +68,15 @@ class TelaawahController extends Controller
             $data['audio_url'] = Storage::url($request->file('audio')->store('telaawat', 'public'));
         }
 
-        $telaawah->update($data);
+        $telaawat->update($data);
 
         return redirect()->route('admin.telaawat.index')
             ->with('success', 'تم تحديث التلاوة بنجاح');
     }
 
-    public function destroy(Telaawah $telaawah)
+    public function destroy(Telaawah $telaawat)
     {
-        $telaawah->delete();
+        $telaawat->delete();
 
         return redirect()->route('admin.telaawat.index')
             ->with('success', 'تم حذف التلاوة بنجاح');
